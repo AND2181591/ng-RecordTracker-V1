@@ -94,12 +94,11 @@
             <button 
                 class="btn btn-primary" 
                 type="submit" 
-                [disabled]="!modalForm.value.orderType || 
-                    (modalForm.value.trackingNum && 
-                    modalForm.value.date) || 
-                    !modalForm.value.album"
+                [disabled]="(!modalForm.value.orderType && 
+                    !(modalForm.value.trackingNum || 
+                    modalForm.value.date)) || 
+                    modalForm.value.album === 'Select album...'"
                 (click)="activeModal.close('Close click')">Submit</button>
         </div>
     </form>
 </div>
-
