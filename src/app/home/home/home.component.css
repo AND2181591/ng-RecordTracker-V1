@@ -5,3 +5,9 @@
 .list-group {
     position: relative;
 }
+
+img {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
