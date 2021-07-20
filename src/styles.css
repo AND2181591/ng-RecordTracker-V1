@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+.validators {
+    color: #ff0000;
+    font-size: .8rem;
+    animation: appear .3s ease-in;
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.list-group-item-action:hover {
+    background-color: #f0f0f0;
+}

@@ -1,0 +1,105 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{ artist.name }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+
+    <form (ngSubmit)="onSubmit()" [formGroup]="modalForm">
+
+        <div class="mb-3">
+
+            <ng-container  
+                *ngIf="albumSelect">
+                <img 
+                    class="img-thumbnail"
+                    [src]="albumSelect.images[0].url" 
+                    [alt]="albumSelect.name">
+                <h5>{{ albumSelect.name }}</h5>
+                <h6>Release Date: {{ albumSelect.release_date }}</h6>
+            </ng-container>
+            
+            <select class="form-control" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' [formControl]="modalForm.get('album')">
+                <option selected>Select album...</option>
+                <option 
+                    *ngFor="let album of albums"
+                    (click)="onAlbumSelect(album)"
+                    [value]="album.name">{{ album.name }}</option>
+            </select>
+
+        </div>
+        
+        <hr>
+        <div class="form-check">
+            <input 
+                class="form-check-input" 
+                formControlName="orderType" 
+                type="radio" 
+                value="preOrder">
+            <label class="form-check-label">
+                Pre-Order
+            </label>
+        </div>
+
+        <div class="form-check">
+            <input 
+                class="form-check-input" 
+                formControlName="orderType" 
+                type="radio" 
+                value="onTheirWay">
+            <label class="form-check-label">
+                On Their Way
+            </label>
+        </div>
+
+        <div *ngIf="modalForm.get('orderType').value === 'onTheirWay'">
+            <hr>
+            <div class="mb-3">
+                <label class="form-label">Tracking Number</label>
+                <label class="form-label">
+                    <h6 class="subhead">
+                        *Copy and paste your tracking number here*
+                    </h6>
+                </label>
+                <input type="text" [formControl]="modalForm.get('trackingNum')" class="form-control" placeholder="Tracking number...">
+            </div>
+        </div>
+
+        <div *ngIf="modalForm.get('orderType').value === 'preOrder'">
+            <hr>
+            <label class="form-label">Expected Shipping Date</label>
+            <div class="form-inline">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input [formControl]="modalForm.get('date')" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" (click)="d.toggle()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-check" viewBox="0 0 16 16">
+                                    <path d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal-footer">
+            <div class="validators" *ngIf="modalForm.value.trackingNum && modalForm.value.date">
+                <p>Please choose either a tracking number, or an estimated date. Otherwise, leave both blank</p>
+            </div>
+            <button 
+                class="btn btn-primary" 
+                type="submit" 
+                [disabled]="!modalForm.value.orderType || 
+                    (modalForm.value.trackingNum && 
+                    modalForm.value.date) || 
+                    !modalForm.value.album"
+                (click)="activeModal.close('Close click')">Submit</button>
+        </div>
+    </form>
+</div>
+

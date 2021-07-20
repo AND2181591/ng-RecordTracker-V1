@@ -1,0 +1,34 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="searchForm">
+
+    <app-input 
+        [control]="searchForm.get('query')" 
+        inputType="text"
+        placeholder="Search your artist...">
+    </app-input>
+    
+    <button class="btn btn-primary">
+        Search
+    </button>
+
+    <div *ngIf="searchForm.get('query').value" 
+        class="list-group">
+
+        <ng-container *ngIf="!searchForm.errors">
+            <a 
+                (click)="open(result)" 
+                class="list-group-item"
+                *ngFor="let result of results"
+                data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <h6>{{ result.name }}</h6>
+            </a>
+        </ng-container>    
+
+        <div *ngIf="searchForm.get('query').dirty &&
+            results.length === 0" 
+            class="list-group-item">
+            <h6>No Results Found</h6>
+        </div>
+
+    </div>
+
+</form>

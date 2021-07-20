@@ -1,0 +1,35 @@
+<div class="field">
+    <ng-content select="[inputLabel]"></ng-content>
+    <input 
+        class="form-control" 
+        [type]="inputType" 
+        [formControl]="control"
+        [placeholder]="placeholder"
+    >
+
+    <div *ngIf="showErrors()" class="validators">
+        <p *ngIf="control.errors.required">
+            Value is required.
+        </p>
+        <p *ngIf="control.errors.email">
+            An email address is required.
+        </p>
+        <p *ngIf="control.errors.minlength">
+            Your value should be at least 
+            {{ control.errors.minlength.requiredLength }} 
+            characters long. So far, you only have 
+            {{ control.errors.minlength.actualLength }} characters.
+        </p>
+        <p *ngIf="control.errors.maxlength">
+            Your value can only be up to  
+            {{ control.errors.maxlength.requiredLength }} 
+            characters long. So far, you have 
+            {{ control.errors.maxlength.actualLength }} characters.
+        </p>
+        <p *ngIf="control.errors.noConnection">
+            Unable to submit. Please check network connection.
+        </p>
+    </div>
+
+</div>
+

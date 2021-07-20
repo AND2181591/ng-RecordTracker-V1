@@ -1,0 +1,16 @@
+form { 
+    margin-bottom: 2rem;
+}
+
+.list-group {
+    box-shadow: 5px 10px 8px;
+    animation: appear .3s ease-in;
+}
+
+a {
+    color: black;
+}
+
+button {
+    margin: 0 0 10px 0;
+}

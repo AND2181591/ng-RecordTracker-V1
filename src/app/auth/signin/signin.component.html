@@ -1,0 +1,17 @@
+<h4>Sign In</h4>
+<form (ngSubmit)="onSubmit()" [formGroup]="signInForm" novalidate>
+    
+    <app-input
+        [control]="signInForm.get('email')" 
+        inputType="text">
+        <div inputLabel>Email</div>
+    </app-input>
+    <app-input 
+        [control]="signInForm.get('password')" 
+        inputType="password">
+        <div inputLabel>Password</div>
+    </app-input>
+
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+

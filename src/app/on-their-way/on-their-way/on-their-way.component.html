@@ -1,0 +1,13 @@
+<div class="header">
+    <h5>On Their Way</h5>
+    <h6 *ngIf="orders.length > 0">These items have shipped or will ship soon!</h6>
+    <div *ngIf="orders.length === 0">
+        No orders on the way...
+    </div>
+</div>
+
+<app-order-list 
+    *ngIf="orders"
+    [orders]="orders"
+    (removeOrder)="onRemoveOrder($event)">
+</app-order-list>

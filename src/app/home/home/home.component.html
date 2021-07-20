@@ -1,0 +1,31 @@
+<div class="header">
+    <h5>Welcome to Record Tracker!</h5>
+    <h6>Organize your orders here!</h6>
+</div>
+
+<app-alert
+    *ngIf="message"
+    [alertMessage]="message"
+    [messageType]="type">
+</app-alert>
+
+
+<app-search
+    (multipleResults)="receivedResults($event)">
+</app-search>
+
+<div *ngIf="multipleResults" class="list-group">
+    <div 
+        (click)="open(result)"
+        *ngFor="let result of multipleResults" 
+        class="list-group-item list-group-item-action" 
+        data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <img 
+            class="img-thumbnail"
+            *ngIf="result.images[0]" 
+            [src]="result.images[0].url" 
+            alt="{{ result.name }}">
+        
+        <h3 class="header">{{ result.name }}</h3>
+    </div>
+</div>

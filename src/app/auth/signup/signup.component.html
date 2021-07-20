@@ -1,0 +1,32 @@
+<h4>Create an Account</h4>
+<form (ngSubmit)="onSubmit()" [formGroup]="signUpForm">
+    <app-input 
+        [control]="signUpForm.get('email')" 
+        inputType="text">
+        <div inputLabel>Email</div>
+    </app-input>
+    <app-input 
+        [control]="signUpForm.get('password')" 
+        inputType="password">
+        <div inputLabel>Password</div>
+    </app-input>
+    <app-input 
+        [control]="signUpForm.get('passwordConfirm')" 
+        inputType="password">
+        <div inputLabel>Password Confirmation</div>
+    </app-input>
+
+    <div *ngIf="signUpForm.get('password').touched && 
+        signUpForm.get('passwordConfirm').touched && 
+        signUpForm.errors" 
+        class="validators">
+        <p *ngIf="signUpForm.errors.passwordsDontMatch">
+            Password and Password Confirmation must match
+        </p>
+    </div>
+
+    <div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </div>
+    
+</form>

@@ -1,0 +1,24 @@
+.albumAppear {
+    animation: albumAppear 1s ease-in;
+}
+
+h5, h6{
+    text-align: center;
+}
+
+option {
+    padding: 6px 12px;
+}
+
+@keyframes albumAppear {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.subhead {
+    font-size: .8rem;
+}

@@ -1,0 +1,17 @@
+<ngb-alert 
+    #selfClosingAlert 
+    *ngIf="alertMessage" 
+    [type]="messageType" 
+    (closed)="alertMessage = ''">
+    {{ alertMessage }}
+</ngb-alert>
+<!-- <p>
+  <button class="btn btn-primary" (click)="changeSuccessMessage()">Change message</button>
+</p> -->
+
+<!-- <ngb-alert 
+    #selfClosingAlert 
+    *ngIf="alertMessage" 
+    [type]="messageType">
+    {{ alertMessage }}
+</ngb-alert> -->
